@@ -14,7 +14,7 @@
 
     var config = {
         appErrorPrefix: '[saili Error] ',
-        appTitle: 'saili'
+        appTitle: 'Saili'
     };
 
     core.value('config', config);
