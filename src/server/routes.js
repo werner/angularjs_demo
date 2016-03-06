@@ -4,6 +4,7 @@ var data = require('./data');
 
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
+router.get('/taxonomies', getTaxonomies);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
@@ -25,4 +26,8 @@ function getPerson(req, res, next) {
     } else {
         four0four.send404(req, res, 'person ' + id + ' not found');
     }
+}
+
+function getTaxonomies(req, res, next) {
+    res.status(200).send(data.taxonomies);
 }

@@ -10,6 +10,7 @@
     function dataservice($http, $q, exception, logger) {
         var service = {
             getPeople: getPeople,
+            getTaxonomies: getTaxonomies,
             getMessageCount: getMessageCount
         };
 
@@ -28,6 +29,20 @@
 
             function fail(e) {
                 return exception.catcher('XHR Failed for getPeople')(e);
+            }
+        }
+
+        function getTaxonomies() {
+            return $http.get('/api/taxonomies')
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for getTaxonomies')(e);
             }
         }
     }

@@ -1,0 +1,55 @@
+<section id="taxonomies-view" class="mainbar">
+  <section class="matter">
+      <div class="container">
+        <div class="row table-margin">
+          <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9">
+              <h3>{{ vm.title }}</h3>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 text-right">
+              <a ng-click="new()" class="btn btn-sm btn-primary btn-block" accesskey="c">
+                <span class="glyphicon glyphicon-file"></span>
+                New
+              </a>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+              <thead>
+                <tr class="success">
+                  <th>Title</th>
+                  <th>Code</th>
+                  <th>Father</th>
+                  <th colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="taxonomy in vm.taxonomies">
+                  <td>{{taxonomy.title}}</td>
+                  <td>{{taxonomy.code}}</td>
+                  <td>{{taxonomy.father}}</td>
+                  <td>
+                    <a ng-click="edit(taxonomy.id)" class="btn btn-xs btn-primary" tooltip="Edit">
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a ng-click="remove(taxonomy.id)" class="btn btn-xs btn-primary" tooltip="Remove">
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                  </td>
+                </tr>
+                </tr>
+              </tbody>
+            </table>
+            <pagination total-items="bigTotalItems" 
+                        ng-model="bigCurrentPage" max-size="maxSize" 
+                        class="pagination-sm" boundary-links="true"
+                        first-text = "First" last-text = "Last"
+                        previous-text = "Previous" next-text = "Next">
+            </pagination>
+          </div>
+        </div>
+      </div>
+    </section>
+</section>
