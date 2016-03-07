@@ -26,6 +26,16 @@
                         content: '<i class="fa fa-bars"></i> Taxonomies'
                     }
                 }
+            },
+            {
+                state: 'taxonomies-new',
+                config: {
+                    url: '/taxonomies/new',
+                    templateUrl: 'app/taxonomies/taxonomies.new.html',
+                    controller: 'TaxonomiesNewController',
+                    controllerAs: 'vm',
+                    title: 'New Taxonomy'
+                }
             }
         ];
     }

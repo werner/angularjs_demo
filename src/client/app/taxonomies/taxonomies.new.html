@@ -1,0 +1,46 @@
+<section id="taxonomies-new-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <form novalidate="novalidate" class="form-margin form-horizontal" role="form"> 
+                <input type="hidden" value="{{_method}}" />
+                <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <label for="name">Title</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" ng-model="taxonomy.title" id="name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <label for="code">Code</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text" ng-model="taxonomy.code" id="code" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <label for="father">Father</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <select ng-options="taxonomy as taxonomy.title for taxonomy in vm.taxonomies track by $index" 
+                            ng-model="taxonomy.father">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button ui-sref="taxonomies" class="btn btn-sm btn-warning" accesskey="c">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                        Cancel
+                    </button>
+                    <button ng-click="save(taxonomy)" class="btn btn-sm btn-primary" accesskey="g">
+                        <span class="glyphicon glyphicon-saved"></span>
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
