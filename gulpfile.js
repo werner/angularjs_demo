@@ -367,6 +367,19 @@ gulp.task('bump', function() {
         .pipe(gulp.dest(config.root));
 });
 
+gulp.task('create-db', function() {
+    var sqlite3 = require('sqlite3').verbose();
+    var db = new sqlite3.Database('demo.sqlite3');
+    createTaxonomyTable(db);
+});
+
+function createTaxonomyTable(db) {
+    db.run('DROP TABLE IF EXISTS taxonomies');
+    db.run('CREATE TABLE IF NOT EXISTS taxonomies ' +
+            '(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, code TEXT, taxonomy_id INTEGER)');
+    console.log('Table created');
+}
+
 /**
  * Optimize the code and re-load browserSync
  */

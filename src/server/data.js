@@ -25,3 +25,4 @@ function getTaxonomies() {
         {id: 5, code: '05', title: 'Widowed',        father: 'Marital Status'}
     ];
 }
+
