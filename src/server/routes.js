@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var four0four = require('./utils/404')();
 var data = require('./data');
+var taxonomy = require('./taxonomy');
 
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
@@ -29,5 +30,7 @@ function getPerson(req, res, next) {
 }
 
 function getTaxonomies(req, res, next) {
-    res.status(200).send(data.taxonomies);
+    taxonomy.listTaxonomies(function(err, data) {
+        res.status(200).send(data);
+    });
 }

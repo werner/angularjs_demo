@@ -374,7 +374,6 @@ gulp.task('create-db', function() {
 });
 
 function createTaxonomyTable(db) {
-    db.run('DROP TABLE IF EXISTS taxonomies');
     db.run('CREATE TABLE IF NOT EXISTS taxonomies ' +
             '(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, code TEXT, taxonomy_id INTEGER)');
     console.log('Table created');
