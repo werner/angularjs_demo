@@ -2,7 +2,8 @@
 var mockData = (function() {
     return {
         getMockPeople: getMockPeople,
-        getMockStates: getMockStates
+        getMockStates: getMockStates,
+        getMockTaxonomies: getMockTaxonomies
     };
 
     function getMockStates() {
@@ -33,4 +34,15 @@ var mockData = (function() {
             {firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming'}
         ];
     }
+
+    function getMockTaxonomies() {
+        return [
+            {id: 1, code: '01', title: 'Marital Status', father: 'null'},
+            {id: 2, code: '02', title: 'Single',         father: 'Marital Status'},
+            {id: 3, code: '03', title: 'Married',        father: 'Marital Status'},
+            {id: 4, code: '04', title: 'Divorced',       father: 'Marital Status'},
+            {id: 5, code: '05', title: 'Widowed',        father: 'Marital Status'}
+        ];
+    }
+
 })();
