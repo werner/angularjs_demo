@@ -375,9 +375,10 @@ gulp.task('create-db', function() {
 
 function createTaxonomyTable(db) {
     db.run('CREATE TABLE IF NOT EXISTS taxonomies ' +
-            '(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, code TEXT, taxonomy_id INTEGER)', 
+            '(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, code TEXT, taxonomy_id INTEGER)',
             function(err) {
-                db.run('CREATE UNIQUE INDEX taxonomies_title_indx on taxonomies (title, taxonomy_id)');
+                db.run('CREATE UNIQUE INDEX taxonomies_title_indx ' +
+                       'on taxonomies (title, taxonomy_id)');
                 console.log('Table created');
             });
 }

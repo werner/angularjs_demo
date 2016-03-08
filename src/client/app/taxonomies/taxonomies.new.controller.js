@@ -27,7 +27,7 @@
             return dataservice.putTaxonomy(taxonomy).then(function (data) {
                 vm.taxonomy = data;
                 logger.info('Taxonomy created');
-                $location.path('taxonomies');
+                return $location.path('taxonomies');
             });
         }
 

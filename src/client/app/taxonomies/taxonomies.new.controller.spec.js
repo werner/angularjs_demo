@@ -5,11 +5,13 @@ describe('TaxonomiesNewController', function() {
 
     beforeEach(function() {
         bard.appModule('app.taxonomies');
-        bard.inject('$controller', '$log', '$q', '$rootScope', 'dataservice');
+        bard.inject('$controller', '$log', '$q', '$rootScope',
+            '$state', '$location', 'dataservice', '$httpBackend');
     });
 
     beforeEach(function() {
         sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
+        sinon.stub(dataservice, 'putTaxonomy').returns($q.when($location.path('taxonomies')));
         controller = $controller('TaxonomiesNewController');
         $rootScope.$apply();
     });
@@ -23,6 +25,12 @@ describe('TaxonomiesNewController', function() {
 
         it('should have title of Dashboard', function () {
             expect(controller.title).to.equal('New Taxonomy');
+        });
+
+        it('should send data to inser Taxonomies', function() {
+            controller.putTaxonomy({id: 1, title: 'Test'}).then(function(response) {
+                expect(response.path()).to.equal('/taxonomies');
+            });
         });
     });
 
