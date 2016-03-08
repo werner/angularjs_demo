@@ -37,6 +37,7 @@ function getTaxonomies(req, res, next) {
 }
 
 function putTaxonomy(req, res, next) {
-    taxonomy.insertTaxonomy(req.body);
-    res.status(200).send({success: true});
+    taxonomy.insertTaxonomy(req.body, function() {
+        res.status(200).send({success: true});
+    });
 }

@@ -25,8 +25,8 @@
                         <label for="father">Father</label>
                     </div>
                     <div class="col-sm-6">
-                        <select ng-options="taxonomy as taxonomy.title for taxonomy in vm.taxonomies track by $index" 
-                            ng-model="taxonomy.father">
+                        <select ng-options="taxonomy as taxonomy.title for taxonomy in vm.taxonomies track by taxonomy.id" 
+                            ng-model="taxonomy.taxonomyId">
                         </select>
                     </div>
                 </div>
