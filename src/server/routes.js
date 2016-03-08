@@ -7,6 +7,7 @@ router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
 router.get('/taxonomies', getTaxonomies);
 router.get('/*', four0four.notFoundMiddleware);
+router.put('/taxonomy', putTaxonomy);
 
 module.exports = router;
 
@@ -33,4 +34,9 @@ function getTaxonomies(req, res, next) {
     taxonomy.listTaxonomies(function(err, data) {
         res.status(200).send(data);
     });
+}
+
+function putTaxonomy(req, res, next) {
+    taxonomy.insertTaxonomy(req.body);
+    res.status(200).send({success: true});
 }

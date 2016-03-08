@@ -35,5 +35,6 @@
                 return vm.taxonomies;
             });
         }
+
     }
 })();

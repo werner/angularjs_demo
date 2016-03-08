@@ -11,6 +11,7 @@
         var service = {
             getPeople: getPeople,
             getTaxonomies: getTaxonomies,
+            putTaxonomy: putTaxonomy,
             getMessageCount: getMessageCount
         };
 
@@ -43,6 +44,20 @@
 
             function fail(e) {
                 return exception.catcher('XHR Failed for getTaxonomies')(e);
+            }
+        }
+
+        function putTaxonomy(data) {
+            return $http.put('/api/taxonomy', data)
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for putTaxonomy')(e);
             }
         }
     }
