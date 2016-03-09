@@ -19,7 +19,7 @@
         activate();
 
         function activate() {
-            var promises = [getMessageCount(), getPeople()];
+            var promises = [getMessageCount()];
             return $q.all(promises).then(function() {
                 logger.info('Activated Dashboard View');
             });
