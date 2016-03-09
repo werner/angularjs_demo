@@ -5,6 +5,16 @@
 
     bootstrapModule.factory('bootstrap.dialog', modalDialog);
 
+    var ModalInstance = ['$scope', '$uibModalInstance', 'options',
+        function ($scope, $uibModalInstance, options) {
+            $scope.title = options.title || 'Title';
+            $scope.message = options.message || '';
+            $scope.okText = options.okText || 'OK';
+            $scope.cancelText = options.cancelText || 'Cancel';
+            $scope.ok = function () { $uibModalInstance.close('ok'); };
+            $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+        }];
+
     modalDialog.$inject = ['$uibModal', '$templateCache'];
     /* @ngInject */
     function modalDialog($uibModal, $templateCache) {
@@ -13,10 +23,11 @@
             confirmationDialog: confirmationDialog
         };
 
-        $templateCache.put('modalDialog.tpl.html', 
+        $templateCache.put('modalDialog.tpl.html',
             '<div>' +
             '    <div class="modal-header">' +
-            '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-ng-click="cancel()">&times;</button>' +
+            '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"' +
+            '             data-ng-click="cancel()">&times;</button>' +
             '        <h3>{{title}}</h3>' +
             '    </div>' +
             '    <div class="modal-body">' +
@@ -24,7 +35,8 @@
             '    </div>' +
             '    <div class="modal-footer">' +
             '        <button class="btn btn-primary" data-ng-click="ok()">{{okText}}</button>' +
-            '        <button class="btn btn-info" data-ng-click="cancel()">{{cancelText}}</button>' +
+            '        <button class="btn btn-info"' +
+            '                data-ng-click="cancel()">{{cancelText}}</button>' +
             '    </div>' +
             '</div>');
 
@@ -56,17 +68,7 @@
                 }
             };
 
-            return $uibModal.open(modalOptions).result; 
+            return $uibModal.open(modalOptions).result;
         }
     }
-
-    var ModalInstance = ['$scope', '$uibModalInstance', 'options',
-        function ($scope, $uibModalInstance, options) {
-            $scope.title = options.title || 'Title';
-            $scope.message = options.message || '';
-            $scope.okText = options.okText || 'OK';
-            $scope.cancelText = options.cancelText || 'Cancel';
-            $scope.ok = function () { $uibModalInstance.close('ok'); };
-            $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }];
 })();

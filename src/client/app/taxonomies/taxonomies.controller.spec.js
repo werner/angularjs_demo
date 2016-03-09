@@ -5,7 +5,8 @@ describe('TaxonomiesController', function() {
 
     beforeEach(function() {
         bard.appModule('app.taxonomies');
-        bard.inject('$controller', '$log', '$q', '$rootScope', 'dataservice');
+        bard.appModule('app.common.bootstrap');
+        bard.inject('$controller', '$log', '$q', '$rootScope', 'dataservice', 'bootstrap.dialog');
     });
 
     beforeEach(function() {
