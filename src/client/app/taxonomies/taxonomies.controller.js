@@ -9,23 +9,15 @@
     /* @ngInject */
     function TaxonomiesController($q, dataservice, logger) {
         var vm = this;
-        vm.messageCount = 0;
         vm.taxonomies = [];
         vm.title = 'Taxonomies';
 
         activate();
 
         function activate() {
-            var promises = [getMessageCount(), getTaxonomies()];
+            var promises = [getTaxonomies()];
             return $q.all(promises).then(function () {
                 logger.info('Taxonomies');
-            });
-        }
-
-        function getMessageCount() {
-            return dataservice.getMessageCount().then(function (data) {
-                vm.messageCount = data;
-                return vm.messageCount;
             });
         }
 
