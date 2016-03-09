@@ -7,7 +7,8 @@
         'app.admin',
         'app.dashboard',
         'app.taxonomies',
-        'app.layout'
+        'app.layout',
+        'app.common.bootstrap'
     ]);
 
 })();

@@ -35,6 +35,20 @@ Taxonomy.updateTaxonomy = function(id, data, callback)
     stmt.finalize();
 };
 
+Taxonomy.deleteTaxonomy = function(id, callback)
+{
+    var stmt = db.prepare('DELETE FROM taxonomies WHERE id = ?');
+    stmt.run(id, function(err) {
+        if (err) {
+            throw err;
+        }
+        else {
+            callback();
+        }
+    });
+    stmt.finalize();
+};
+
 Taxonomy.listTaxonomies = function(callback) {
     db.all('SELECT h.id, h.title, h.code, h.taxonomyId, f.title father FROM taxonomies h ' +
            'LEFT JOIN taxonomies f ON f.id = h.taxonomyId',

@@ -7,6 +7,7 @@ router.get('/taxonomy/:id', getTaxonomy);
 router.get('/*', four0four.notFoundMiddleware);
 router.put('/taxonomy', putTaxonomy);
 router.post('/taxonomy', postTaxonomy);
+router.delete('/taxonomy/:id', deleteTaxonomy);
 
 module.exports = router;
 
@@ -33,5 +34,11 @@ function postTaxonomy(req, res, next) {
 function getTaxonomy(req, res, next) {
     taxonomy.showTaxonomy(req.params.id, function(err, data) {
         res.status(200).send(data);
+    });
+}
+
+function deleteTaxonomy(req, res, next) {
+    taxonomy.deleteTaxonomy(req.params.id, function() {
+        res.status(200).send({success: true});
     });
 }

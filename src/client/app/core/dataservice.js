@@ -9,10 +9,11 @@
     /* @ngInject */
     function dataservice($http, $q, exception, logger) {
         var service = {
-            getTaxonomies: getTaxonomies,
-            editTaxonomy: editTaxonomy,
-            putTaxonomy: putTaxonomy,
-            postTaxonomy: postTaxonomy,
+            getTaxonomies:   getTaxonomies,
+            editTaxonomy:    editTaxonomy,
+            putTaxonomy:     putTaxonomy,
+            postTaxonomy:    postTaxonomy,
+            deleteTaxonomy:  deleteTaxonomy,
             getMessageCount: getMessageCount
         };
 
@@ -73,6 +74,20 @@
 
             function fail(e) {
                 return exception.catcher('XHR Failed for editTaxonomy')(e);
+            }
+        }
+
+        function deleteTaxonomy(data) {
+            return $http.delete('/api/taxonomy/' + data)
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for deleteTaxonomy')(e);
             }
         }
     }
