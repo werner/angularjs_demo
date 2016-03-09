@@ -36,6 +36,16 @@
                     controllerAs: 'vm',
                     title: 'New Taxonomy'
                 }
+            },
+            {
+                state: 'taxonomies-edit',
+                config: {
+                    url: '/taxonomies/edit/:id',
+                    templateUrl: 'app/taxonomies/taxonomies.edit.html',
+                    controller: 'TaxonomiesEditController',
+                    controllerAs: 'vm',
+                    title: 'Edit Taxonomy'
+                }
             }
         ];
     }

@@ -11,7 +11,9 @@
         var service = {
             getPeople: getPeople,
             getTaxonomies: getTaxonomies,
+            editTaxonomy: editTaxonomy,
             putTaxonomy: putTaxonomy,
+            postTaxonomy: postTaxonomy,
             getMessageCount: getMessageCount
         };
 
@@ -58,6 +60,34 @@
 
             function fail(e) {
                 return exception.catcher('XHR Failed for putTaxonomy')(e);
+            }
+        }
+
+        function postTaxonomy(data) {
+            return $http.post('/api/taxonomy', data)
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for postTaxonomy')(e);
+            }
+        }
+
+        function editTaxonomy(data) {
+            return $http.get('/api/taxonomy/' + data)
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for editTaxonomy')(e);
             }
         }
     }

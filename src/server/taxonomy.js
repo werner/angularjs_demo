@@ -19,6 +19,22 @@ Taxonomy.insertTaxonomy = function(data, callback)
     stmt.finalize();
 };
 
+Taxonomy.updateTaxonomy = function(data, callback)
+{
+    var stmt = db.prepare('UPDATE taxonomies ' +
+            'SET (title, code, taxonomy_id) = (?, ?, ?) WHERE id = ?');
+    var taxonomyId = data.taxonomyId ? data.taxonomyId.id : null;
+    stmt.run(null, data.title, data.code, taxonomyId, data.id, function(err) {
+        if (err) {
+            throw err;
+        }
+        else {
+            callback();
+        }
+    });
+    stmt.finalize();
+};
+
 Taxonomy.listTaxonomies = function(callback) {
     db.all('SELECT h.id, h.title, h.code, h.taxonomy_id, f.title father FROM taxonomies h ' +
            'LEFT JOIN taxonomies f ON f.id = h.taxonomy_id',
@@ -41,7 +57,7 @@ Taxonomy.showTaxonomy = function(id, callback) {
         }
         else {
             if (row) {
-                callback('', row);
+                callback(null, row);
             }
             else {
                 console.log('No record found');

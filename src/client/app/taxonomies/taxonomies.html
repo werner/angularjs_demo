@@ -29,7 +29,8 @@
 								<td>{{taxonomy.code}}</td>
 								<td>{{taxonomy.father}}</td>
 								<td>
-									<a ng-click="edit(taxonomy.id)" class="btn btn-xs btn-primary" tooltip="Edit">
+                                    <a ui-sref="taxonomies-edit({id: taxonomy.id})" 
+                                        class="btn btn-xs btn-primary" tooltip="Edit">
 										<span class="glyphicon glyphicon-edit"></span>
 									</a>
 								</td>
