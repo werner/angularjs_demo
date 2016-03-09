@@ -9,7 +9,6 @@
     /* @ngInject */
     function dataservice($http, $q, exception, logger) {
         var service = {
-            getPeople: getPeople,
             getTaxonomies: getTaxonomies,
             editTaxonomy: editTaxonomy,
             putTaxonomy: putTaxonomy,
@@ -20,20 +19,6 @@
         return service;
 
         function getMessageCount() { return $q.when(72); }
-
-        function getPeople() {
-            return $http.get('/api/people')
-                .then(success)
-                .catch(fail);
-
-            function success(response) {
-                return response.data;
-            }
-
-            function fail(e) {
-                return exception.catcher('XHR Failed for getPeople')(e);
-            }
-        }
 
         function getTaxonomies() {
             return $http.get('/api/taxonomies')
@@ -63,7 +48,7 @@
             }
         }
 
-        function postTaxonomy(data) {
+        function postTaxonomy(id, data) {
             return $http.post('/api/taxonomy', data)
                 .then(success)
                 .catch(fail);

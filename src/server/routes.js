@@ -25,7 +25,7 @@ function putTaxonomy(req, res, next) {
 }
 
 function postTaxonomy(req, res, next) {
-    taxonomy.updateTaxonomy(req.body, function() {
+    taxonomy.updateTaxonomy(req.body.id, req.body, function() {
         res.status(200).send({success: true});
     });
 }

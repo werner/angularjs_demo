@@ -33,8 +33,8 @@
         function getTaxonomy(id) {
             return dataservice.editTaxonomy(id).then(function (data) {
                 vm.taxonomy = data;
-                var father = $filter('filter')(vm.taxonomies, {id: data.taxonomy_id}, true);
-                vm.taxonomy.taxonomy_id = father[0] || null;
+                var father = $filter('filter')(vm.taxonomies, {id: data.taxonomyId}, true);
+                vm.taxonomy.taxonomyId = father[0] || null;
                 return vm.taxonomy;
             });
         }

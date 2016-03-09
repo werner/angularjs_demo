@@ -19,12 +19,12 @@ Taxonomy.insertTaxonomy = function(data, callback)
     stmt.finalize();
 };
 
-Taxonomy.updateTaxonomy = function(data, callback)
+Taxonomy.updateTaxonomy = function(id, data, callback)
 {
     var stmt = db.prepare('UPDATE taxonomies ' +
-            'SET (title, code, taxonomy_id) = (?, ?, ?) WHERE id = ?');
+            'SET title = ?, code = ?, taxonomyId = ? WHERE id = ?');
     var taxonomyId = data.taxonomyId ? data.taxonomyId.id : null;
-    stmt.run(null, data.title, data.code, taxonomyId, data.id, function(err) {
+    stmt.run(data.title, data.code, taxonomyId, id, function(err) {
         if (err) {
             throw err;
         }
@@ -36,8 +36,8 @@ Taxonomy.updateTaxonomy = function(data, callback)
 };
 
 Taxonomy.listTaxonomies = function(callback) {
-    db.all('SELECT h.id, h.title, h.code, h.taxonomy_id, f.title father FROM taxonomies h ' +
-           'LEFT JOIN taxonomies f ON f.id = h.taxonomy_id',
+    db.all('SELECT h.id, h.title, h.code, h.taxonomyId, f.title father FROM taxonomies h ' +
+           'LEFT JOIN taxonomies f ON f.id = h.taxonomyId',
             function(err, rows) {
                 if (err) {
                     throw err;
@@ -49,7 +49,7 @@ Taxonomy.listTaxonomies = function(callback) {
 };
 
 Taxonomy.showTaxonomy = function(id, callback) {
-    var stmt = db.prepare('SELECT id, title, code, taxonomy_id FROM taxonomies WHERE id = ?');
+    var stmt = db.prepare('SELECT id, title, code, taxonomyId FROM taxonomies WHERE id = ?');
     stmt.bind(id);
     stmt.get(function(err, row) {
         if (err) {
