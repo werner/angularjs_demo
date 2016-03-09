@@ -1,7 +1,8 @@
 /* jshint -W117, -W030 */
-describe('TaxonomiesNewController', function() {
+describe('TaxonomiesEditController', function() {
     var controller;
     var taxonomies = mockData.getMockTaxonomies();
+    var taxonomy = mockData.getMockTaxonomy();
 
     beforeEach(function() {
         bard.appModule('app.taxonomies');
@@ -11,24 +12,25 @@ describe('TaxonomiesNewController', function() {
 
     beforeEach(function() {
         sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
-        sinon.stub(dataservice, 'putTaxonomy').returns($q.when($location.path('taxonomies')));
-        controller = $controller('TaxonomiesNewController');
+        sinon.stub(dataservice, 'editTaxonomy').returns($q.when(taxonomy));
+        sinon.stub(dataservice, 'postTaxonomy').returns($q.when($location.path('taxonomies')));
+        controller = $controller('TaxonomiesEditController');
         $rootScope.$apply();
     });
 
     bard.verifyNoOutstandingHttpRequests();
 
-    describe('Taxonomies New Controller', function() {
+    describe('Taxonomies Edit Controller', function() {
         it('should be created successfully', function () {
             expect(controller).to.be.defined;
         });
 
         it('should have title of Dashboard', function () {
-            expect(controller.title).to.equal('New Taxonomy');
+            expect(controller.title).to.equal('Edit Taxonomy');
         });
 
-        it('should send data to insert Taxonomies', function() {
-            controller.putTaxonomy({id: 1, title: 'Test'}).then(function(response) {
+        it('should send data to update Taxonomies', function() {
+            controller.postTaxonomy(taxonomy).then(function(response) {
                 expect(response.path()).to.equal('/taxonomies');
             });
         });

@@ -5,7 +5,8 @@
         .module('app.taxonomies')
         .controller('TaxonomiesEditController', TaxonomiesEditController);
 
-    TaxonomiesEditController.$inject = ['$q', 'dataservice', 'logger', '$location', '$stateParams', '$filter'];
+    TaxonomiesEditController.$inject = ['$q', 'dataservice', 'logger',
+                                        '$location', '$stateParams', '$filter'];
     /* @ngInject */
     function TaxonomiesEditController($q, dataservice, logger, $location, $stateParams, $filter) {
         var vm = this;
