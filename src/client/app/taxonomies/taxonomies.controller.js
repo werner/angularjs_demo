@@ -30,7 +30,7 @@
         }
 
         function deleteTaxonomy(id) {
-            modalDialog.deleteDialog('Taxonomy').then(function(data) {
+            return modalDialog.deleteDialog('Taxonomy').then(function(data) {
                 return dataservice.deleteTaxonomy(id).then(function (data) {
                     logger.info('Taxonomy deleted');
                     getTaxonomies();

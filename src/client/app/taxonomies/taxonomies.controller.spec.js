@@ -11,6 +11,11 @@ describe('TaxonomiesController', function() {
 
     beforeEach(function() {
         sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
+        sinon.stub(dataservice, 'deleteTaxonomy').returns($q.when(taxonomies));
+        bard.mockService(dialog, {
+            deleteDialog: $q.when(taxonomies),
+            _default:     $q.when([])
+        });
         controller = $controller('TaxonomiesController');
         $rootScope.$apply();
     });
@@ -24,6 +29,12 @@ describe('TaxonomiesController', function() {
 
         it('should have title of Dashboard', function () {
             expect(controller.title).to.equal('Taxonomies');
+        });
+
+        it('should show delete message box', function () {
+            controller.deleteTaxonomy(2);
+            expect(dialog.deleteDialog).to.have
+                .been.called.once;
         });
     });
 
