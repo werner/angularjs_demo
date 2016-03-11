@@ -4,16 +4,18 @@
     var bootstrapModule = angular.module('app.common.bootstrap', ['ui.bootstrap']);
 
     bootstrapModule.factory('bootstrap.dialog', modalDialog);
+    bootstrapModule.controller('ModalInstance', ModalInstance);
 
-    var ModalInstance = ['$scope', '$uibModalInstance', 'options',
-        function ($scope, $uibModalInstance, options) {
-            $scope.title = options.title || 'Title';
-            $scope.message = options.message || '';
-            $scope.okText = options.okText || 'OK';
-            $scope.cancelText = options.cancelText || 'Cancel';
-            $scope.ok = function () { $uibModalInstance.close('ok'); };
-            $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-        }];
+    ModalInstance.$inject = ['$scope', '$uibModalInstance', 'options'];
+    /* @ngInject */
+    function ModalInstance($scope, $uibModalInstance, options) {
+        $scope.title = options.title || 'Title';
+        $scope.message = options.message || '';
+        $scope.okText = options.okText || 'OK';
+        $scope.cancelText = options.cancelText || 'Cancel';
+        $scope.ok = function () { $uibModalInstance.close('ok'); };
+        $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+    }
 
     modalDialog.$inject = ['$uibModal', '$templateCache'];
     /* @ngInject */
