@@ -7,7 +7,10 @@ describe('core', function() {
 
         beforeEach(function() {
             module('app.core', bard.fakeToastr);
-            bard.inject('$location', '$rootScope', '$state', '$templateCache');
+            bard.inject('$location', '$rootScope', '$state', '$templateCache',
+                '$httpBackend', 'routerHelper', 'logger');
+            sinon.spy(logger, 'warning');
+            $httpFlush = $httpBackend.flush;
             $templateCache.put(views.core, '');
         });
 
@@ -25,6 +28,12 @@ describe('core', function() {
             $location.path('/invalid');
             $rootScope.$apply();
             expect($state.current.templateUrl).to.equal(views.four0four);
+        });
+
+        it('test route error', function() {
+            $rootScope.$broadcast('$stateChangeError', {}, {}, {}, {}, {}, {data: {}});
+            expect(logger.warning).to.have
+                .been.called;
         });
     });
 });
