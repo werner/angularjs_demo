@@ -40,16 +40,32 @@ describe('modalDialog', function() {
             expect(dialog).to.be.defined;
         });
 
-        it('should call confirmation dialog', function() {
-            dialog.confirmationDialog('Test', 'a message', 'Accept', 'Cancel');
-            expect($uibModal.open).to.have
-                .been.called;
+        describe('Confirmation Dialog', function() {
+            it('should call confirmation dialog with arguments', function() {
+                dialog.confirmationDialog('Test', 'a message', 'Accept', 'Cancel');
+                expect($uibModal.open).to.have
+                    .been.called;
+            });
+
+            it('should call confirmation dialog without arguments', function() {
+                dialog.confirmationDialog();
+                expect($uibModal.open).to.have
+                    .been.called;
+            });
         });
 
-        it('should call delete dialog', function() {
-            dialog.deleteDialog('Test');
-            expect($uibModal.open).to.have
-                .been.called;
+        describe('Delete Dialog', function() {
+            it('should call delete dialog with a title', function() {
+                dialog.deleteDialog('Test');
+                expect($uibModal.open).to.have
+                    .been.called;
+            });
+
+            it('should call delete dialog without a title', function() {
+                dialog.deleteDialog();
+                expect($uibModal.open).to.have
+                    .been.called;
+            });
         });
 
         it('should call ok action on dialog', function() {
