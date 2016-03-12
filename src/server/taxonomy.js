@@ -4,7 +4,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('demo.sqlite3');
 var Taxonomy = {};
 
-Taxonomy.insertTaxonomy = function(data, callback)
+Taxonomy.insert = function(data, callback)
 {
     var stmt = db.prepare('INSERT INTO taxonomies VALUES (?, ?, ?, ?)');
     var taxonomyId = data.taxonomyId ? data.taxonomyId.id : null;
@@ -19,7 +19,7 @@ Taxonomy.insertTaxonomy = function(data, callback)
     stmt.finalize();
 };
 
-Taxonomy.updateTaxonomy = function(id, data, callback)
+Taxonomy.update = function(id, data, callback)
 {
     var stmt = db.prepare('UPDATE taxonomies ' +
             'SET title = ?, code = ?, taxonomyId = ? WHERE id = ?');
@@ -35,7 +35,7 @@ Taxonomy.updateTaxonomy = function(id, data, callback)
     stmt.finalize();
 };
 
-Taxonomy.deleteTaxonomy = function(id, callback)
+Taxonomy.delete = function(id, callback)
 {
     var stmt = db.prepare('DELETE FROM taxonomies WHERE id = ?');
     stmt.run(id, function(err) {
@@ -49,7 +49,7 @@ Taxonomy.deleteTaxonomy = function(id, callback)
     stmt.finalize();
 };
 
-Taxonomy.listTaxonomies = function(callback) {
+Taxonomy.list = function(callback) {
     db.all('SELECT h.id, h.title, h.code, h.taxonomyId, f.title father FROM taxonomies h ' +
            'LEFT JOIN taxonomies f ON f.id = h.taxonomyId',
             function(err, rows) {
@@ -62,7 +62,7 @@ Taxonomy.listTaxonomies = function(callback) {
             });
 };
 
-Taxonomy.showTaxonomy = function(id, callback) {
+Taxonomy.show = function(id, callback) {
     var stmt = db.prepare('SELECT id, title, code, taxonomyId FROM taxonomies WHERE id = ?');
     stmt.bind(id);
     stmt.get(function(err, row) {

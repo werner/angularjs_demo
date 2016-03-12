@@ -10,7 +10,7 @@
     function dataservice($http, $q, exception, logger) {
         var service = {
             getTaxonomies:   getTaxonomies,
-            editTaxonomy:    editTaxonomy,
+            getTaxonomy:     getTaxonomy,
             putTaxonomy:     putTaxonomy,
             postTaxonomy:    postTaxonomy,
             deleteTaxonomy:  deleteTaxonomy,
@@ -35,8 +35,8 @@
             }
         }
 
-        function putTaxonomy(data) {
-            return $http.put('/api/taxonomy', data)
+        function putTaxonomy(id, data) {
+            return $http.put('/api/taxonomy/' + id, data)
                 .then(success)
                 .catch(fail);
 
@@ -49,7 +49,7 @@
             }
         }
 
-        function postTaxonomy(id, data) {
+        function postTaxonomy(data) {
             return $http.post('/api/taxonomy', data)
                 .then(success)
                 .catch(fail);
@@ -63,7 +63,7 @@
             }
         }
 
-        function editTaxonomy(data) {
+        function getTaxonomy(data) {
             return $http.get('/api/taxonomy/' + data)
                 .then(success)
                 .catch(fail);

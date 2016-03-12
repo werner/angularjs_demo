@@ -55,13 +55,13 @@ describe('core dataservice', function() {
         });
     });
 
-    describe('when call editTaxonomy', function() {
+    describe('when call getTaxonomy', function() {
         it('should return taxonomy', function() {
             var taxonomy;
             taxonomy = mockData.getMockTaxonomy();
             $httpBackend.when('GET', '/api/taxonomy/1')
                 .respond(200, taxonomy);
-            dataservice.editTaxonomy(1)
+            dataservice.getTaxonomy(1)
                 .then(function(data) {
                     expect(data.title).to.equal('test');
                 });
@@ -71,7 +71,7 @@ describe('core dataservice', function() {
         it('should return false when not found', function() {
             $httpBackend.when('GET', '/api/taxonomy/5')
                 .respond(404, {success: false});
-            dataservice.editTaxonomy(5)
+            dataservice.getTaxonomy(5)
                 .then(function(data) {
                     expect(data).to.have.property('success')
                                 .and.to.be.false;
@@ -82,9 +82,9 @@ describe('core dataservice', function() {
 
     describe('when call putTaxonomy', function() {
         it('should return success', function() {
-            $httpBackend.when('PUT', '/api/taxonomy', {id: 2, title: 'Countries'})
+            $httpBackend.when('PUT', '/api/taxonomy/2', {id: 2, title: 'Countries'})
                 .respond(200, {success: true});
-            dataservice.putTaxonomy({id: 2, title: 'Countries'})
+            dataservice.putTaxonomy(2, {id: 2, title: 'Countries'})
                 .then(function(data) {
                     expect(data).to.have.property('success')
                                 .and.to.be.true;
@@ -93,9 +93,9 @@ describe('core dataservice', function() {
         });
 
         it('should return false when all required data is not provided', function() {
-            $httpBackend.when('PUT', '/api/taxonomy', {id: 3})
+            $httpBackend.when('PUT', '/api/taxonomy/3', {})
                 .respond(500, {success: false});
-            dataservice.putTaxonomy({id: 3})
+            dataservice.putTaxonomy(3, {})
                 .then(function(data) {
                     expect(data).to.have.property('success')
                                 .and.to.be.false;

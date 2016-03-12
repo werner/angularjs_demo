@@ -12,7 +12,7 @@
         vm.title = 'New Taxonomy';
         vm.taxonomies = [];
         vm.taxonomy = {};
-        vm.putTaxonomy = putTaxonomy;
+        vm.create = create;
 
         getTaxonomies();
 
@@ -23,8 +23,8 @@
             });
         }
 
-        function putTaxonomy(taxonomy) {
-            return dataservice.putTaxonomy(taxonomy).then(function (data) {
+        function create(taxonomy) {
+            return dataservice.postTaxonomy(taxonomy).then(function (data) {
                 vm.taxonomy = data;
                 logger.info('Taxonomy created');
                 return $location.path('taxonomies');

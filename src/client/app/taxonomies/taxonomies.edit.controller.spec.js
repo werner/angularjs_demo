@@ -12,8 +12,8 @@ describe('TaxonomiesEditController', function() {
 
     beforeEach(function() {
         sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
-        sinon.stub(dataservice, 'editTaxonomy').returns($q.when(taxonomy));
-        sinon.stub(dataservice, 'postTaxonomy').returns($q.when($location.path('taxonomies')));
+        sinon.stub(dataservice, 'getTaxonomy').returns($q.when(taxonomy));
+        sinon.stub(dataservice, 'putTaxonomy').returns($q.when($location.path('taxonomies')));
         controller = $controller('TaxonomiesEditController');
         $rootScope.$apply();
     });
@@ -30,7 +30,7 @@ describe('TaxonomiesEditController', function() {
         });
 
         it('should send data to update Taxonomies', function() {
-            controller.postTaxonomy(taxonomy).then(function(response) {
+            controller.update(taxonomy.id, taxonomy).then(function(response) {
                 expect(response.path()).to.equal('/taxonomies');
             });
         });

@@ -13,7 +13,7 @@
         vm.title = 'Edit Taxonomy';
         vm.taxonomies = [];
         vm.taxonomy = {};
-        vm.postTaxonomy = postTaxonomy;
+        vm.update = update;
 
         activate();
 
@@ -32,7 +32,7 @@
         }
 
         function getTaxonomy(id) {
-            return dataservice.editTaxonomy(id).then(function (data) {
+            return dataservice.getTaxonomy(id).then(function (data) {
                 vm.taxonomy = data;
                 var father = $filter('filter')(vm.taxonomies, {id: data.taxonomyId}, true);
                 vm.taxonomy.taxonomyId = father[0] || null;
@@ -40,8 +40,8 @@
             });
         }
 
-        function postTaxonomy(id, taxonomy) {
-            return dataservice.postTaxonomy(id, taxonomy).then(function (data) {
+        function update(id, taxonomy) {
+            return dataservice.putTaxonomy(id, taxonomy).then(function (data) {
                 vm.taxonomy = data;
                 logger.info('Taxonomy updated');
                 return $location.path('taxonomies');
