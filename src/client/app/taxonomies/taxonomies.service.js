@@ -3,11 +3,11 @@
 
     angular
         .module('app.core')
-        .factory('dataservice', dataservice);
+        .factory('TaxonomiesService', TaxonomiesService);
 
-    dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
+    TaxonomiesService.$inject = ['$http', '$q', 'exception', 'logger'];
     /* @ngInject */
-    function dataservice($http, $q, exception, logger) {
+    function TaxonomiesService($http, $q, exception, logger) {
         var service = {
             getTaxonomies:   getTaxonomies,
             getTaxonomy:     getTaxonomy,

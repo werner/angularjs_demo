@@ -5,9 +5,9 @@
         .module('app.taxonomies')
         .controller('TaxonomiesController', TaxonomiesController);
 
-    TaxonomiesController.$inject = ['$q', 'dataservice', 'logger', 'bootstrap.dialog'];
+    TaxonomiesController.$inject = ['$q', 'TaxonomiesService', 'logger', 'bootstrap.dialog'];
     /* @ngInject */
-    function TaxonomiesController($q, dataservice, logger, modalDialog) {
+    function TaxonomiesController($q, TaxonomiesService, logger, modalDialog) {
         var vm = this;
         vm.taxonomies = [];
         vm.title = 'Taxonomies';
@@ -23,7 +23,7 @@
         }
 
         function getTaxonomies() {
-            return dataservice.getTaxonomies().then(function (data) {
+            return TaxonomiesService.getTaxonomies().then(function (data) {
                 vm.taxonomies = data;
                 return vm.taxonomies;
             });
@@ -31,7 +31,7 @@
 
         function deleteTaxonomy(id) {
             return modalDialog.deleteDialog('Taxonomy').then(function(data) {
-                return dataservice.deleteTaxonomy(id).then(function (data) {
+                return TaxonomiesService.deleteTaxonomy(id).then(function (data) {
                     logger.info('Taxonomy deleted');
                     getTaxonomies();
                 });

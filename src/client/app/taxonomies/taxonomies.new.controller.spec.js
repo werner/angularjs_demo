@@ -6,12 +6,14 @@ describe('TaxonomiesNewController', function() {
     beforeEach(function() {
         bard.appModule('app.taxonomies');
         bard.inject('$controller', '$log', '$q', '$rootScope',
-            '$state', '$location', 'dataservice', '$httpBackend');
+            '$state', '$location', 'TaxonomiesService', '$httpBackend');
     });
 
     beforeEach(function() {
-        sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
-        sinon.stub(dataservice, 'postTaxonomy').returns($q.when($location.path('taxonomies')));
+        sinon.stub(TaxonomiesService, 'getTaxonomies').returns($q.when(taxonomies));
+        sinon.stub(TaxonomiesService, 'postTaxonomy').returns(
+            $q.when($location.path('taxonomies'))
+        );
         controller = $controller('TaxonomiesNewController');
         $rootScope.$apply();
     });

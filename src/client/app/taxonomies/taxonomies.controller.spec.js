@@ -6,12 +6,13 @@ describe('TaxonomiesController', function() {
     beforeEach(function() {
         bard.appModule('app.taxonomies');
         bard.appModule('app.common.bootstrap');
-        bard.inject('$controller', '$log', '$q', '$rootScope', 'dataservice', 'bootstrap.dialog');
+        bard.inject('$controller', '$log', '$q', '$rootScope',
+            'TaxonomiesService', 'bootstrap.dialog');
     });
 
     beforeEach(function() {
-        sinon.stub(dataservice, 'getTaxonomies').returns($q.when(taxonomies));
-        sinon.stub(dataservice, 'deleteTaxonomy').returns($q.when(taxonomies));
+        sinon.stub(TaxonomiesService, 'getTaxonomies').returns($q.when(taxonomies));
+        sinon.stub(TaxonomiesService, 'deleteTaxonomy').returns($q.when(taxonomies));
         bard.mockService(dialog, {
             deleteDialog: $q.when(taxonomies),
             _default:     $q.when([])

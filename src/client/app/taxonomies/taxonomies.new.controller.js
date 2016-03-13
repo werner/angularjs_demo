@@ -5,9 +5,9 @@
         .module('app.taxonomies')
         .controller('TaxonomiesNewController', TaxonomiesNewController);
 
-    TaxonomiesNewController.$inject = ['$q', 'dataservice', 'logger', '$location'];
+    TaxonomiesNewController.$inject = ['$q', 'TaxonomiesService', 'logger', '$location'];
     /* @ngInject */
-    function TaxonomiesNewController($q, dataservice, logger, $location) {
+    function TaxonomiesNewController($q, TaxonomiesService, logger, $location) {
         var vm = this;
         vm.title = 'New Taxonomy';
         vm.taxonomies = [];
@@ -17,14 +17,14 @@
         getTaxonomies();
 
         function getTaxonomies() {
-            return dataservice.getTaxonomies().then(function (data) {
+            return TaxonomiesService.getTaxonomies().then(function (data) {
                 vm.taxonomies = data;
                 return vm.taxonomies;
             });
         }
 
         function create(taxonomy) {
-            return dataservice.postTaxonomy(taxonomy).then(function (data) {
+            return TaxonomiesService.postTaxonomy(taxonomy).then(function (data) {
                 vm.taxonomy = data;
                 logger.info('Taxonomy created');
                 return $location.path('taxonomies');
