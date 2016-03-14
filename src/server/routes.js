@@ -9,14 +9,20 @@ router.get('/*', four0four.notFoundMiddleware);
 router.put('/taxonomy/:id', putTaxonomy);
 router.post('/taxonomy', postTaxonomy);
 router.delete('/taxonomy/:id', deleteTaxonomy);
+router.get('/dashboard', getDashboard);
 
-router.post('/log_in', logInUser);
+router.post('/authenticate', authenticateUser);
 
 module.exports = router;
 
 //////////////
 
-function logInUser(req, res, next) {
+
+function getDashboard(req, res, next) {
+    res.status(200).send({success: true});
+}
+
+function authenticateUser(req, res, next) {
     sessions.create(function(err, data) {
         if (data.success) {
             res.status(200).send({success: true});

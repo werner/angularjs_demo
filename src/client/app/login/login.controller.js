@@ -23,7 +23,7 @@
 
         function submit() {
             $http
-                .post('/authenticate', vm.user)
+                .post('/api/authenticate', vm.user)
                 .success(function (data, status, headers, config) {
                     $window.sessionStorage.token = data.token;
                     vm.isAuthenticated = true;
