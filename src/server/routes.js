@@ -1,35 +1,22 @@
 var router = require('express').Router();
 var four0four = require('./utils/404')();
 var taxonomy = require('./taxonomy');
-var sessions = require('./sessions');
 
 router.get('/taxonomies', getTaxonomies);
 router.get('/taxonomy/:id', getTaxonomy);
-router.get('/*', four0four.notFoundMiddleware);
 router.put('/taxonomy/:id', putTaxonomy);
 router.post('/taxonomy', postTaxonomy);
 router.delete('/taxonomy/:id', deleteTaxonomy);
 router.get('/dashboard', getDashboard);
 
-router.post('/authenticate', authenticateUser);
+router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
 
 //////////////
 
-
 function getDashboard(req, res, next) {
     res.status(200).send({success: true});
-}
-
-function authenticateUser(req, res, next) {
-    sessions.create(function(err, data) {
-        if (data.success) {
-            res.status(200).send({success: true});
-        } else {
-            res.status(401).send({success: false});
-        }
-    });
 }
 
 function getTaxonomies(req, res, next) {

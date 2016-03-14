@@ -372,6 +372,7 @@ gulp.task('create-db', function() {
     var db = new sqlite3.Database('demo.sqlite3');
     createTaxonomyTable(db);
     createUserTable(db);
+    createSessionsTable(db);
 });
 
 function createTaxonomyTable(db) {
@@ -402,6 +403,13 @@ gulp.task('create-admin-user', function() {
     db.run('INSERT INTO users(username, password) VALUES("admin", "' + password + '")');
 });
 
+function createSessionsTable(db) {
+    db.run('CREATE TABLE IF NOT EXISTS sessions ' +
+            '(token TEXT)',
+            function(err) {
+                console.log('Sessions table created');
+            });
+}
 /**
  * Optimize the code and re-load browserSync
  */
