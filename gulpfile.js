@@ -394,6 +394,14 @@ function createUserTable(db) {
             });
 }
 
+gulp.task('create-admin-user', function() {
+    var bcrypt = require('bcryptjs');
+    var password = bcrypt.hashSync('password', 8);
+    var sqlite3 = require('sqlite3').verbose();
+    var db = new sqlite3.Database('demo.sqlite3');
+    db.run('INSERT INTO users(username, password) VALUES("admin", "' + password + '")');
+});
+
 /**
  * Optimize the code and re-load browserSync
  */
