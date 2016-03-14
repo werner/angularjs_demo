@@ -20,7 +20,17 @@
                     templateUrl: 'app/core/404.html',
                     title: '404'
                 }
-            }
+            },
+            {
+                state: 'login',
+                config: {
+                    url: '/login',
+                    templateUrl: 'app/login/login.html',
+                    controller: 'LoginController',
+                    controllerAs: 'vm',
+                    title: 'LogIn'
+                }
+            },
         ];
     }
 })();
