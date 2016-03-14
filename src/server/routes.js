@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var four0four = require('./utils/404')();
 var taxonomy = require('./taxonomy');
+var sessions = require('./sessions');
 
 router.get('/taxonomies', getTaxonomies);
 router.get('/taxonomy/:id', getTaxonomy);
@@ -9,9 +10,21 @@ router.put('/taxonomy/:id', putTaxonomy);
 router.post('/taxonomy', postTaxonomy);
 router.delete('/taxonomy/:id', deleteTaxonomy);
 
+router.post('/log_in', logInUser);
+
 module.exports = router;
 
 //////////////
+
+function logInUser(req, res, next) {
+    sessions.create(function(err, data) {
+        if (data.success) {
+            res.status(200).send({success: true});
+        } else {
+            res.status(401).send({success: false});
+        }
+    });
+}
 
 function getTaxonomies(req, res, next) {
     taxonomy.list(function(err, data) {
