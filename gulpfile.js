@@ -371,15 +371,26 @@ gulp.task('create-db', function() {
     var sqlite3 = require('sqlite3').verbose();
     var db = new sqlite3.Database('demo.sqlite3');
     createTaxonomyTable(db);
+    createUserTable(db);
 });
 
 function createTaxonomyTable(db) {
     db.run('CREATE TABLE IF NOT EXISTS taxonomies ' +
             '(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, code TEXT, taxonomyId INTEGER)',
             function(err) {
-                db.run('CREATE UNIQUE INDEX taxonomies_title_indx ' +
+                db.run('CREATE UNIQUE INDEX IF NOT EXISTS taxonomies_title_indx ' +
                        'on taxonomies (title, taxonomyId)');
-                console.log('Table created');
+                console.log('Taxonomies table created');
+            });
+}
+
+function createUserTable(db) {
+    db.run('CREATE TABLE IF NOT EXISTS users ' +
+            '(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)',
+            function(err) {
+                db.run('CREATE UNIQUE INDEX IF NOT EXISTS users_name_idx ' +
+                       'on users (username)');
+                console.log('Users table created');
             });
 }
 
