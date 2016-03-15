@@ -18,7 +18,7 @@
         activate();
 
         function activate() {
-            $http.get('/api/dashboard').success(function(data) {
+            $http.get('/api/home', {session: null}).success(function(data) {
                 console.log(data);
             });
         }
