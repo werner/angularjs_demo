@@ -13,7 +13,7 @@ exports.createUser = function(name, password, callback) {
     var user = {
         name: name,
         password: hash(password)
-    }
+    };
 
     var stmt = db.prepare('INSERT INTO users(username, password) VALUES(?, ?)');
     stmt.run(user.name, user.password, function(err) {
@@ -24,7 +24,7 @@ exports.createUser = function(name, password, callback) {
             callback();
         }
     });
-}
+};
 
 exports.authenticate = function(username, password, callback) {
 
@@ -44,4 +44,4 @@ exports.authenticate = function(username, password, callback) {
         }
     });
 
-}
+};

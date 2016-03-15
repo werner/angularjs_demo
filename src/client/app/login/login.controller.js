@@ -4,9 +4,9 @@
     angular.module('app.login', ['app.core'])
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$http', '$window'];
+    LoginController.$inject = ['$http', '$window', '$location'];
     /* @ngInject */
-    function LoginController($http, $window) {
+    function LoginController($http, $window, $location) {
         var vm = this;
 
         vm.activate = activate;
@@ -27,7 +27,7 @@
                 .success(function (data, status, headers, config) {
                     $window.sessionStorage.token = data.token;
                     vm.isAuthenticated = true;
-                    vm.welcome = 'Welcome ' + data.username;
+                    $location.path('/');
                 })
                 .error(function (data, status, headers, config) {
                     // Erase the token if the user fails to log in

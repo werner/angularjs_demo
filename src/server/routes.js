@@ -4,7 +4,7 @@ var taxonomy = require('./taxonomy');
 var auth = require('./sessions');
 var session = require('express-session');
 
-router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+router.use(session({secret: 'keyboard cat', cookie: {maxAge: 60000}}));
 
 router.get('/taxonomies', getTaxonomies);
 router.get('/taxonomy/:id', getTaxonomy);
@@ -12,6 +12,7 @@ router.put('/taxonomy/:id', putTaxonomy);
 router.post('/taxonomy', postTaxonomy);
 router.delete('/taxonomy/:id', deleteTaxonomy);
 router.get('/home', auth.authorize, getDashboard);
+router.post('/authenticate', auth.login);
 
 // Post requests from a form can log in a user.
 router.post('/login', auth.login);
@@ -26,7 +27,7 @@ module.exports = router;
 //////////////
 
 function getDashboard(req, res, next) {
-    console.log('ok');
+    res.status(200).send();
 }
 
 function getTaxonomies(req, res, next) {

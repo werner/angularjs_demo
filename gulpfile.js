@@ -398,7 +398,7 @@ function createUserTable(db) {
 gulp.task('create-admin-user', function() {
     var crypto = require('crypto');
     var password = crypto.createHash('sha1')
-        .update('password').digest('base64')
+        .update('password').digest('base64');
     var sqlite3 = require('sqlite3').verbose();
     var db = new sqlite3.Database('demo.sqlite3');
     db.run('INSERT INTO users(username, password) VALUES("admin", "' + password + '")');
