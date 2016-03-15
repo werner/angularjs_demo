@@ -27,7 +27,7 @@ module.exports = router;
 //////////////
 
 function getDashboard(req, res, next) {
-    res.status(200).send();
+    res.status(200).send({success: true});
 }
 
 function getTaxonomies(req, res, next) {

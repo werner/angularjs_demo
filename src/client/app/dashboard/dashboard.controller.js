@@ -5,9 +5,9 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$q', 'logger', '$http'];
+    DashboardController.$inject = ['$q', 'logger', '$http', 'DashboardService'];
     /* @ngInject */
-    function DashboardController($q, logger, $http) {
+    function DashboardController($q, logger, $http, DashboardService) {
         var vm = this;
         vm.news = {
             title: 'saili',
@@ -18,9 +18,7 @@
         activate();
 
         function activate() {
-            $http.get('/api/home', {session: null}).success(function(data) {
-                console.log(data);
-            });
+            return DashboardService.getHome();
         }
     }
 })();

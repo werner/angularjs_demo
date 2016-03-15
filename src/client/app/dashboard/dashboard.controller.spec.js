@@ -4,12 +4,16 @@ describe('DashboardController', function() {
 
     beforeEach(function() {
         bard.appModule('app.dashboard');
-        bard.inject('$controller', '$log', '$q', '$rootScope');
+        bard.inject('$controller', '$log', '$q',
+            '$rootScope', '$http', 'DashboardService', '$httpBackend');
     });
 
     beforeEach(function () {
         controller = $controller('DashboardController');
+        $httpBackend.when('GET', '/api/home').respond(200);
+        sinon.stub(DashboardService, 'getHome').returns($q.when());
         $rootScope.$apply();
+        $httpBackend.flush();
     });
 
     bard.verifyNoOutstandingHttpRequests();

@@ -16,7 +16,7 @@ exports.login = function(req, res, next) {
         }
 
         if (user) {
-            req.session.user = {id: user.id, username: user.username, 
+            req.session.user = {id: user.id, username: user.username,
                 token: user.id + user.username};
             res.status(200).send(req.session.user);
         } else {

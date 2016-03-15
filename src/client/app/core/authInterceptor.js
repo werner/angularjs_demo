@@ -16,7 +16,6 @@
                 return config;
             },
             responseError: function (rejection) {
-                console.log(rejection);
                 var msg = rejection.data + ': ' + rejection.config.url;
                 toastr.error(msg);
                 if (rejection.status === 401) {
