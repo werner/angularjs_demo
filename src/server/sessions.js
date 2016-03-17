@@ -12,7 +12,7 @@ exports.login = function(req, res, next) {
 
     User.authenticate(username, pass, function(err, user) {
         if (err) {
-            return next(err);
+            return res.status(401).send({msg: err});
         }
 
         if (user) {

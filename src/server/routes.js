@@ -14,9 +14,6 @@ router.delete('/taxonomy/:id', deleteTaxonomy);
 router.get('/home', auth.authorize, getDashboard);
 router.post('/authenticate', auth.login);
 
-// Post requests from a form can log in a user.
-router.post('/login', auth.login);
-
 // Get requests will log out the user.
 router.get('/logout', auth.logout);
 

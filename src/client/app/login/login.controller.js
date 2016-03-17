@@ -22,7 +22,7 @@
         }
 
         function submit() {
-            $http
+            return $http
                 .post('/api/authenticate', vm.user)
                 .success(function (data, status, headers, config) {
                     $window.sessionStorage.token = data.token;

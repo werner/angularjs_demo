@@ -39,7 +39,7 @@ exports.authenticate = function(username, password, callback) {
                 callback(null, row);
             }
             else {
-                console.log('No user found');
+                callback('No user found', null);
             }
         }
     });
